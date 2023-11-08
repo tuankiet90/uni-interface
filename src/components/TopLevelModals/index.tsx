@@ -22,7 +22,8 @@ export default function TopLevelModals() {
   const { account } = useWeb3React()
   useAccountRiskCheck(account)
   const accountBlocked = Boolean(blockedAccountModalOpen && account)
-  const shouldShowDevFlags = isDevelopmentEnv() || isStagingEnv()
+  // const shouldShowDevFlags = isDevelopmentEnv() || isStagingEnv()
+  const shouldShowDevFlags= false;
 
   return (
     <>
