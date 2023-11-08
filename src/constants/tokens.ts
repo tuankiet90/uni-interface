@@ -8,7 +8,7 @@ import {
   WETH9,
 } from "@uniswap/sdk-core";
 import invariant from "tiny-invariant";
-import { WETH_ADDRESS } from "./config";
+import { WETH_ADDRESS } from "../config/config";
 export const NATIVE_CHAIN_ID = "NATIVE";
 
 // When decimals are not specified for an ERC20 token

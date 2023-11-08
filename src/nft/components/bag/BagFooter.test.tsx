@@ -1,7 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { parseEther } from '@ethersproject/units'
 import { ChainId, CurrencyAmount, Percent } from '@uniswap/sdk-core'
-import { UNIVERSAL_ROUTER_ADDRESS } from '@uniswap/universal-router-sdk'
 import { useWeb3React } from '@web3-react/core'
 import { nativeOnChain } from 'constants/tokens'
 import { getURAddress, useNftUniversalRouterAddress } from 'graphql/data/nft/NftUniversalRouterAddress'
@@ -19,6 +18,7 @@ import { TradeState } from 'state/routing/types'
 import { TEST_TOKEN_1, TEST_TRADE_EXACT_INPUT, toCurrencyAmount } from 'test-utils/constants'
 import { mocked } from 'test-utils/mocked'
 import { render, screen } from 'test-utils/render'
+import {GET_ROUTER_ADDRESS} from "../../../config/config"
 
 import { BagFooter } from './BagFooter'
 
@@ -420,9 +420,9 @@ describe('BagFooter.tsx', () => {
 
   it('should use the correct UR address', () => {
     expect(getURAddress(undefined)).toBe(undefined)
-    expect(getURAddress(ChainId.MAINNET)).toBe(UNIVERSAL_ROUTER_ADDRESS(ChainId.MAINNET))
+    expect(getURAddress(ChainId.MAINNET)).toBe(GET_ROUTER_ADDRESS(ChainId.MAINNET))
     expect(getURAddress(ChainId.MAINNET, 'test_nft_ur_address')).toBe('test_nft_ur_address')
-    expect(getURAddress(ChainId.OPTIMISM)).toBe(UNIVERSAL_ROUTER_ADDRESS(ChainId.OPTIMISM))
+    expect(getURAddress(ChainId.OPTIMISM)).toBe(GET_ROUTER_ADDRESS(ChainId.OPTIMISM))
     expect(getURAddress(10101010)).toBe(undefined)
   })
 })

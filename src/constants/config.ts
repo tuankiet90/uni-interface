@@ -1,4 +1,0 @@
-export const WETH_ADDRESS = {
-  137: "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
-  42161: "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
-};
