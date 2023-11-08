@@ -26,7 +26,7 @@ const exec = promisify(child_process.exec)
 
 
 function fetchSchemaData() {
-  exec(`yarn get-graphql-schema --h Origin=https://app.uniswap.org https://api.uniswap.org/v1/graphql`)
+  exec(`yarn --silent  get-graphql-schema --h Origin=https://app.uniswap.org https://api.uniswap.org/v1/graphql`)
     .then(({ stderr, stdout }) => {
       fs.writeFile(`./src/graphql/data/schema.graphql`, stdout)
       if (stderr) {
@@ -37,12 +37,12 @@ function fetchSchemaData() {
     })
     .catch((err) => {
       console.error(err)
-      console.error(`Failed to fetch schema fromxx`)
+      console.error(`Failed to fetch schema graphql`)
     })
 }
 
 function fetchSchemaTheGraph() {
-  exec(`yarn get-graphql-schema --h Origin=https://app.uniswap.org https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3`)
+  exec(`yarn --silent  get-graphql-schema --h Origin=https://app.uniswap.org https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3`)
     .then(({ stderr, stdout }) => {
       fs.writeFile(`./src/graphql/thegraph/schema.graphql`, stdout)
       if (stderr) {
@@ -53,7 +53,7 @@ function fetchSchemaTheGraph() {
     })
     .catch((err) => {
       console.error(err)
-      console.error(`Failed to fetch schema fromxx`)
+      console.error(`Failed to fetch schema TheGraph`)
     })
 }
 fetchSchemaTheGraph()
