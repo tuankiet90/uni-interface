@@ -32,6 +32,7 @@
     "cypress:open": "cypress open --browser chrome --e2e",
     "cypress:run": "cypress run --browser chrome --e2e",
     "deduplicate": "yarn-deduplicate --strategy=highest",
+    "install-sdk": "rm -r ./node_modules/@uniswap/v3-sdk; cp -r ./forks/v3-sdk ./node_modules/@uniswap/v3-sdk",
     "postinstall": "yarn patch-package"
   },
   "husky": {
