@@ -140,7 +140,7 @@ export const MenuDropdown = () => {
           <NavDropdown top={{ sm: 'unset', lg: '56' }} bottom={{ sm: '50', lg: 'unset' }} right="0">
             <Column gap="16">
               <Column paddingX="8" gap="4">
-                <Box display={{ sm: 'none', lg: 'flex', xxl: 'none' }}>
+                {/* <Box display={{ sm: 'none', lg: 'flex', xxl: 'none' }}>
                   <PrimaryMenuRow to="/pool" close={toggleOpen}>
                     <Icon>
                       <PoolIcon width={24} height={24} fill={theme.neutral1} />
@@ -149,7 +149,7 @@ export const MenuDropdown = () => {
                       <Trans>Pool</Trans>
                     </PrimaryMenuRow.Text>
                   </PrimaryMenuRow>
-                </Box>
+                </Box> */}
                 <Box
                   onClick={() =>
                     openDownloadApp({
@@ -157,14 +157,14 @@ export const MenuDropdown = () => {
                     })
                   }
                 >
-                  <PrimaryMenuRow close={toggleOpen}>
+                  {/* <PrimaryMenuRow close={toggleOpen}>
                     <Icon>
                       <AppleLogo width="24px" height="24px" fill={theme.neutral1} />
                     </Icon>
                     <PrimaryMenuRow.Text>
                       <Trans>Download Uniswap Wallet</Trans>
                     </PrimaryMenuRow.Text>
-                  </PrimaryMenuRow>
+                  </PrimaryMenuRow> */}
                 </Box>
                 <PrimaryMenuRow to="/vote" close={toggleOpen}>
                   <Icon>

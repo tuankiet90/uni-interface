@@ -78,15 +78,16 @@ export const PageTabs = () => {
           <Trans>Tokens</Trans>
         </MenuItem>
       )}
-      {!shouldDisableNFTRoutes && (
-        <MenuItem dataTestId="nft-nav" href="/nfts" isActive={isNftPage}>
-          <Trans>NFTs</Trans>
-        </MenuItem>
-      )}
-      <Box display={{ sm: 'flex', lg: 'none', xxl: 'flex' }} width="full">
         <MenuItem href="/pools" dataTestId="pool-nav-link" isActive={isPoolActive}>
           <Trans>Pools</Trans>
         </MenuItem>
+      {/* {!shouldDisableNFTRoutes && (
+        <MenuItem dataTestId="nft-nav" href="/nfts" isActive={isNftPage}>
+          <Trans>NFTs</Trans>
+        </MenuItem>
+      )} */}
+      <Box display={{ sm: 'flex', lg: 'none', xxl: 'flex' }} width="full">
+      
       </Box>
       <Box marginY="4">
         <MenuDropdown />
