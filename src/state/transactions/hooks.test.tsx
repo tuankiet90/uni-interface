@@ -1,5 +1,4 @@
 import { BigNumber } from '@ethersproject/bignumber'
-import { PERMIT2_ADDRESS } from '@uniswap/permit2-sdk'
 import { ChainId } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import { USDC_MAINNET } from 'constants/tokens'
@@ -16,6 +15,7 @@ import {
 } from './hooks'
 import { clearAllTransactions, finalizeTransaction } from './reducer'
 import { ApproveTransactionInfo, TransactionInfo, TransactionType } from './types'
+import { GET_PERMIT2_ADDRESS } from 'config/config'
 
 const pendingTransactionResponse = {
   hash: '0x123',
@@ -35,7 +35,7 @@ const pendingTransactionResponse = {
 const mockApprovalTransactionInfo: ApproveTransactionInfo = {
   type: TransactionType.APPROVAL,
   tokenAddress: USDC_MAINNET.address,
-  spender: PERMIT2_ADDRESS,
+  spender: GET_PERMIT2_ADDRESS(),
   amount: '10000',
 }
 
@@ -107,7 +107,7 @@ describe('Transactions hooks', () => {
   describe('useHasPendingApproval', () => {
     it('returns true when there is a pending transaction', () => {
       addPendingTransaction(mockApprovalTransactionInfo)
-      const { result } = renderHook(() => useHasPendingApproval(USDC_MAINNET, PERMIT2_ADDRESS))
+      const { result } = renderHook(() => useHasPendingApproval(USDC_MAINNET, GET_PERMIT2_ADDRESS()))
       expect(result.current).toBe(true)
     })
 
@@ -115,31 +115,31 @@ describe('Transactions hooks', () => {
       addPendingTransaction({
         type: TransactionType.SUBMIT_PROPOSAL,
       })
-      const { result } = renderHook(() => useHasPendingApproval(USDC_MAINNET, PERMIT2_ADDRESS))
+      const { result } = renderHook(() => useHasPendingApproval(USDC_MAINNET, GET_PERMIT2_ADDRESS()))
       expect(result.current).toBe(false)
     })
 
     it('returns false when there is a pending approval but it is not for the current chain', () => {
       mocked(useWeb3React).mockReturnValue({ chainId: 2 } as ReturnType<typeof useWeb3React>)
       addPendingTransaction(mockApprovalTransactionInfo)
-      const { result } = renderHook(() => useHasPendingApproval(USDC_MAINNET, PERMIT2_ADDRESS))
+      const { result } = renderHook(() => useHasPendingApproval(USDC_MAINNET, GET_PERMIT2_ADDRESS()))
       expect(result.current).toBe(false)
     })
 
     it('returns false when there is a confirmed approval transaction', () => {
       addConfirmedTransaction(mockApprovalTransactionInfo)
-      const { result } = renderHook(() => useHasPendingApproval(USDC_MAINNET, PERMIT2_ADDRESS))
+      const { result } = renderHook(() => useHasPendingApproval(USDC_MAINNET, GET_PERMIT2_ADDRESS()))
       expect(result.current).toBe(false)
     })
 
     it('returns false when there are no pending transactions', () => {
-      const { result } = renderHook(() => useHasPendingApproval(USDC_MAINNET, PERMIT2_ADDRESS))
+      const { result } = renderHook(() => useHasPendingApproval(USDC_MAINNET, GET_PERMIT2_ADDRESS()))
       expect(result.current).toBe(false)
     })
 
     it('returns false when there is a pending revocation', () => {
       addPendingTransaction(mockRevocationTransactionInfo)
-      const { result } = renderHook(() => useHasPendingApproval(USDC_MAINNET, PERMIT2_ADDRESS))
+      const { result } = renderHook(() => useHasPendingApproval(USDC_MAINNET, GET_PERMIT2_ADDRESS()))
       expect(result.current).toBe(false)
     })
   })
@@ -147,7 +147,7 @@ describe('Transactions hooks', () => {
   describe('useHasPendingRevocation', () => {
     it('returns true when there is a pending revocation', () => {
       addPendingTransaction(mockRevocationTransactionInfo)
-      const { result } = renderHook(() => useHasPendingRevocation(USDC_MAINNET, PERMIT2_ADDRESS))
+      const { result } = renderHook(() => useHasPendingRevocation(USDC_MAINNET, GET_PERMIT2_ADDRESS()))
       expect(result.current).toBe(true)
     })
 
@@ -155,31 +155,31 @@ describe('Transactions hooks', () => {
       addPendingTransaction({
         type: TransactionType.SUBMIT_PROPOSAL,
       })
-      const { result } = renderHook(() => useHasPendingRevocation(USDC_MAINNET, PERMIT2_ADDRESS))
+      const { result } = renderHook(() => useHasPendingRevocation(USDC_MAINNET, GET_PERMIT2_ADDRESS()))
       expect(result.current).toBe(false)
     })
 
     it('returns false when there is a pending revocation but it is not for the current chain', () => {
       mocked(useWeb3React).mockReturnValue({ chainId: 2 } as ReturnType<typeof useWeb3React>)
       addPendingTransaction(mockRevocationTransactionInfo)
-      const { result } = renderHook(() => useHasPendingRevocation(USDC_MAINNET, PERMIT2_ADDRESS))
+      const { result } = renderHook(() => useHasPendingRevocation(USDC_MAINNET, GET_PERMIT2_ADDRESS()))
       expect(result.current).toBe(false)
     })
 
     it('returns false when there is a confirmed approval transaction', () => {
       addConfirmedTransaction(mockRevocationTransactionInfo)
-      const { result } = renderHook(() => useHasPendingRevocation(USDC_MAINNET, PERMIT2_ADDRESS))
+      const { result } = renderHook(() => useHasPendingRevocation(USDC_MAINNET, GET_PERMIT2_ADDRESS()))
       expect(result.current).toBe(false)
     })
 
     it('returns false when there are no pending transactions', () => {
-      const { result } = renderHook(() => useHasPendingRevocation(USDC_MAINNET, PERMIT2_ADDRESS))
+      const { result } = renderHook(() => useHasPendingRevocation(USDC_MAINNET, GET_PERMIT2_ADDRESS()))
       expect(result.current).toBe(false)
     })
 
     it('returns false when there is a pending approval', () => {
       addPendingTransaction(mockApprovalTransactionInfo)
-      const { result } = renderHook(() => useHasPendingRevocation(USDC_MAINNET, PERMIT2_ADDRESS))
+      const { result } = renderHook(() => useHasPendingRevocation(USDC_MAINNET, GET_PERMIT2_ADDRESS()))
       expect(result.current).toBe(false)
     })
   })

@@ -1,8 +1,9 @@
-import { AllowanceTransfer, MaxAllowanceTransferAmount, PERMIT2_ADDRESS, PermitSingle } from '@uniswap/permit2-sdk'
+import { AllowanceTransfer, MaxAllowanceTransferAmount, PermitSingle } from '@uniswap/permit2-sdk'
 import { CurrencyAmount, Token } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import PERMIT2_ABI from 'abis/permit2.json'
 import { Permit2 } from 'abis/types'
+import { GET_PERMIT2_ADDRESS } from 'config/config'
 import { useContract } from 'hooks/useContract'
 import { useSingleCallResult } from 'lib/hooks/multicall'
 import ms from 'ms'
@@ -19,7 +20,7 @@ function toDeadline(expiration: number): number {
 }
 
 export function usePermitAllowance(token?: Token, owner?: string, spender?: string) {
-  const contract = useContract<Permit2>(PERMIT2_ADDRESS, PERMIT2_ABI)
+  const contract = useContract<Permit2>(GET_PERMIT2_ADDRESS(), PERMIT2_ABI)
   const inputs = useMemo(() => [owner, token?.address, spender], [owner, spender, token?.address])
 
   // If there is no allowance yet, re-check next observed block.
@@ -76,7 +77,7 @@ export function useUpdatePermitAllowance(
         sigDeadline: toDeadline(PERMIT_SIG_EXPIRATION),
       }
 
-      const { domain, types, values } = AllowanceTransfer.getPermitData(permit, PERMIT2_ADDRESS, chainId)
+      const { domain, types, values } = AllowanceTransfer.getPermitData(permit, GET_PERMIT2_ADDRESS(), chainId)
       const signature = await signTypedData(provider.getSigner(account), domain, types, values)
       onPermitSignature?.({ ...permit, signature })
       return
