@@ -296,7 +296,7 @@ export default function AuthenticatedHeader({ account, openSettings }: { account
             <LoadingBubble height="16px" width="100px" margin="4px 0 20px 0" />
           </Column>
         )}
-        {!shouldDisableNFTRoutes && (
+        {/* {!shouldDisableNFTRoutes && (
           <HeaderButton
             data-testid="nft-view-self-nfts"
             onClick={navigateToProfile}
@@ -327,7 +327,7 @@ export default function AuthenticatedHeader({ account, openSettings }: { account
               </>
             )}
           </HeaderButton>
-        )}
+        )} */}
         {Boolean(!fiatOnrampAvailable && fiatOnrampAvailabilityChecked) && (
           <FiatOnrampNotAvailableText marginTop="8px">
             <Trans>Not available in your region</Trans>

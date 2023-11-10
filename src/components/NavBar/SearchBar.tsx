@@ -139,87 +139,88 @@ export const SearchBar = () => {
   }, [handleKeyPress, inputRef])
 
   return (
-    <Trace section={InterfaceSectionName.NAVBAR_SEARCH}>
-      <Column
-        data-cy="search-bar"
-        position={{ sm: 'fixed', md: 'absolute' }}
-        width={{ sm: isOpen ? 'viewWidth' : 'auto', md: 'auto' }}
-        ref={searchRef}
-        className={clsx(styles.searchBarContainerNft, {
-          searchBarContainerDisableBlur: isNavSearchInputVisible,
-        })}
-        display={{ sm: isOpen ? 'flex' : 'none', xl: 'flex' }}
-        {...(isNavSearchInputVisible && {
-          position: 'relative',
-          display: 'flex',
-        })}
-        {...(isOpen && {
-          boxShadow: 'deep',
-        })}
-      >
-        <Row
-          className={clsx(
-            styles.nftSearchBar,
-            !isOpen && !isMobile && magicalGradientOnHover,
-            isMobileOrTablet && (isOpen ? styles.visible : styles.hidden)
-          )}
-          borderRadius={isOpen || isMobileOrTablet ? undefined : '16'}
-          borderTopRightRadius={isOpen && !isMobile ? '16' : undefined}
-          borderTopLeftRadius={isOpen && !isMobile ? '16' : undefined}
-          borderBottomWidth={isOpen || isMobileOrTablet ? '0px' : '1px'}
-          backgroundColor={isOpen ? 'surface1' : 'surface1'}
-          onClick={() => !isOpen && toggleOpen()}
-          gap="12"
-        >
-          <Box className={styles.searchContentLeftAlign}>
-            <Box display={{ sm: 'none', md: 'flex' }}>
-              <Search width="20px" height="20px" />
-            </Box>
-            <Box display={{ sm: 'flex', md: 'none' }} color="neutral3" onClick={toggleOpen}>
-              <ChevronLeftIcon />
-            </Box>
-          </Box>
-          <TraceEvent
-            events={[BrowserEvent.onFocus]}
-            name={InterfaceEventName.NAVBAR_SEARCH_SELECTED}
-            element={InterfaceElementName.NAVBAR_SEARCH_INPUT}
-            properties={{ ...trace }}
-          >
-            <Box
-              as="input"
-              data-cy="search-bar-input"
-              placeholder={placeholderText}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                !isOpen && toggleOpen()
-                setSearchValue(event.target.value)
-              }}
-              onBlur={() => sendAnalyticsEvent(InterfaceEventName.NAVBAR_SEARCH_EXITED, navbarSearchEventProperties)}
-              className={`${styles.searchBarInput} ${styles.searchContentLeftAlign}`}
-              value={searchValue}
-              ref={inputRef}
-              width="full"
-            />
-          </TraceEvent>
-          {!isOpen && <KeyShortCut>/</KeyShortCut>}
-        </Row>
-        <Column overflow="hidden" className={clsx(isOpen ? styles.visible : styles.hidden)}>
-          {isOpen && (
-            <SearchBarDropdown
-              toggleOpen={toggleOpen}
-              tokens={reducedTokens}
-              collections={reducedCollections}
-              queryText={debouncedSearchValue}
-              hasInput={debouncedSearchValue.length > 0}
-              isLoading={tokensAreLoading || collectionsAreLoading}
-            />
-          )}
-        </Column>
-      </Column>
-      {isMobileOrTablet && (
-        <NavIcon onClick={toggleOpen} label={placeholderText}>
-          <NavMagnifyingGlassIcon />
-        </NavIcon>
-      )}
-    </Trace>
+    <></>
+    // <Trace section={InterfaceSectionName.NAVBAR_SEARCH}>
+    //   <Column
+    //     data-cy="search-bar"
+    //     position={{ sm: 'fixed', md: 'absolute' }}
+    //     width={{ sm: isOpen ? 'viewWidth' : 'auto', md: 'auto' }}
+    //     ref={searchRef}
+    //     className={clsx(styles.searchBarContainerNft, {
+    //       searchBarContainerDisableBlur: isNavSearchInputVisible,
+    //     })}
+    //     display={{ sm: isOpen ? 'flex' : 'none', xl: 'flex' }}
+    //     {...(isNavSearchInputVisible && {
+    //       position: 'relative',
+    //       display: 'flex',
+    //     })}
+    //     {...(isOpen && {
+    //       boxShadow: 'deep',
+    //     })}
+    //   >
+    //     <Row
+    //       className={clsx(
+    //         styles.nftSearchBar,
+    //         !isOpen && !isMobile && magicalGradientOnHover,
+    //         isMobileOrTablet && (isOpen ? styles.visible : styles.hidden)
+    //       )}
+    //       borderRadius={isOpen || isMobileOrTablet ? undefined : '16'}
+    //       borderTopRightRadius={isOpen && !isMobile ? '16' : undefined}
+    //       borderTopLeftRadius={isOpen && !isMobile ? '16' : undefined}
+    //       borderBottomWidth={isOpen || isMobileOrTablet ? '0px' : '1px'}
+    //       backgroundColor={isOpen ? 'surface1' : 'surface1'}
+    //       onClick={() => !isOpen && toggleOpen()}
+    //       gap="12"
+    //     >
+    //       <Box className={styles.searchContentLeftAlign}>
+    //         <Box display={{ sm: 'none', md: 'flex' }}>
+    //           <Search width="20px" height="20px" />
+    //         </Box>
+    //         <Box display={{ sm: 'flex', md: 'none' }} color="neutral3" onClick={toggleOpen}>
+    //           <ChevronLeftIcon />
+    //         </Box>
+    //       </Box>
+    //       <TraceEvent
+    //         events={[BrowserEvent.onFocus]}
+    //         name={InterfaceEventName.NAVBAR_SEARCH_SELECTED}
+    //         element={InterfaceElementName.NAVBAR_SEARCH_INPUT}
+    //         properties={{ ...trace }}
+    //       >
+    //         <Box
+    //           as="input"
+    //           data-cy="search-bar-input"
+    //           placeholder={placeholderText}
+    //           onChange={(event: ChangeEvent<HTMLInputElement>) => {
+    //             !isOpen && toggleOpen()
+    //             setSearchValue(event.target.value)
+    //           }}
+    //           onBlur={() => sendAnalyticsEvent(InterfaceEventName.NAVBAR_SEARCH_EXITED, navbarSearchEventProperties)}
+    //           className={`${styles.searchBarInput} ${styles.searchContentLeftAlign}`}
+    //           value={searchValue}
+    //           ref={inputRef}
+    //           width="full"
+    //         />
+    //       </TraceEvent>
+    //       {!isOpen && <KeyShortCut>/</KeyShortCut>}
+    //     </Row>
+    //     <Column overflow="hidden" className={clsx(isOpen ? styles.visible : styles.hidden)}>
+    //       {isOpen && (
+    //         <SearchBarDropdown
+    //           toggleOpen={toggleOpen}
+    //           tokens={reducedTokens}
+    //           collections={reducedCollections}
+    //           queryText={debouncedSearchValue}
+    //           hasInput={debouncedSearchValue.length > 0}
+    //           isLoading={tokensAreLoading || collectionsAreLoading}
+    //         />
+    //       )}
+    //     </Column>
+    //   </Column>
+    //   {isMobileOrTablet && (
+    //     <NavIcon onClick={toggleOpen} label={placeholderText}>
+    //       <NavMagnifyingGlassIcon />
+    //     </NavIcon>
+    //   )}
+    // </Trace>
   )
 }

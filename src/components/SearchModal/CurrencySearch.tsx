@@ -225,11 +225,13 @@ export function CurrencySearch({
   useOnClickOutside(node, open ? toggle : undefined)
 
   // if no results on main list, show option to expand into inactive
-  const filteredInactiveTokens = useSearchInactiveTokenLists(
+  let filteredInactiveTokens = useSearchInactiveTokenLists(
     !onlyShowCurrenciesWithBalance && (sortedTokens.length === 0 || (debouncedQuery.length > 2 && !isAddressSearch))
       ? debouncedQuery
       : undefined
   )
+
+  //filteredInactiveTokens= [new Token(42161,"0xec8b0f7ffe3ae75d7ffab09429e3675bb63503e4",18,"XXX",'xxxx',true) as any]
 
   // Timeout token loader after 3 seconds to avoid hanging in a loading state.
   useEffect(() => {

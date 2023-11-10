@@ -166,7 +166,7 @@ export const MenuDropdown = () => {
                     </PrimaryMenuRow.Text>
                   </PrimaryMenuRow> */}
                 </Box>
-                <PrimaryMenuRow to="/vote" close={toggleOpen}>
+                {/* <PrimaryMenuRow to="/vote" close={toggleOpen}>
                   <Icon>
                     <GovernanceIcon width={24} height={24} color={theme.neutral1} />
                   </Icon>
@@ -181,7 +181,7 @@ export const MenuDropdown = () => {
                   <PrimaryMenuRow.Text>
                     <Trans>View more analytics</Trans>
                   </PrimaryMenuRow.Text>
-                </PrimaryMenuRow>
+                </PrimaryMenuRow> */}
               </Column>
               <Separator />
               <Box
